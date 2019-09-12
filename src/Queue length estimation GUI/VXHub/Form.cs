@@ -15,18 +15,32 @@ namespace VXHub
 {
     public partial class Form1 : Form
     {
+        Boolean specific_time;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void cmdBrowse_Click(object sender, EventArgs e)
+        private void cmdBrowse_input_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dlg = new FolderBrowserDialog();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtFolder_in.Text = dlg.SelectedPath;
             } else
+            {
+                txtFolder_in.Text = "";
+            }
+        }
+        private void CmdBrowse_output_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                txtFolder_in.Text = dlg.SelectedPath;
+            }
+            else
             {
                 txtFolder_in.Text = "";
             }
@@ -41,27 +55,37 @@ namespace VXHub
             cmdCalculate.Enabled = Directory.Exists(txtFolder_out.Text);
         }
 
+        private void RadioButton_specific_CheckedChanged(object sender, EventArgs e)
+        {
+            specific_time = true;
+        }
+        private void RadioButton_All_CheckedChanged(object sender, EventArgs e)
+        {
+            specific_time = false;
+        }
+
         private void cmdCalculate_Click(object sender, EventArgs e)
         {
             String scriptPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            scriptPath += @"\Scripts\queue_estimation_v3.py";
+            scriptPath += @"\Scripts\queue_estimation_v4.py";
 
             scriptPath = "\"" + scriptPath + "\""; 
             String path_input = "\"" + txtFolder_in.Text + "\"";
             String path_output = "\"" + txtFolder_out.Text + "\"";
 
             String time = txtTime.Value.ToString();
+            String time_interval = txtTimeInterval.Value.ToString();
             String sw1 = txtSW1.Value.ToString();
             String sw2 = txtSW2.Value.ToString();
             String speed = txtSpeed.Value.ToString();
 
-            String arguments = $"{scriptPath} {path_input} {path_output} {time} {sw1} {sw2} {speed}";
+            String arguments = $"{scriptPath} {path_input} {path_output} {this.specific_time} {time} {time_interval} {sw1} {sw2} {speed}";
 
             try
             {
                 ProcessStartInfo info = new ProcessStartInfo();
                 info.Arguments = arguments;
-                info.FileName = @"C:\ProgramData\Anaconda3\python.exe";
+                info.FileName = @"C:\Users\ghiasia\AppData\Local\Programs\Python\Python36\python.exe";
                 info.WindowStyle = ProcessWindowStyle.Maximized;
 
                 Process process = Process.Start(info);
@@ -70,7 +94,7 @@ namespace VXHub
 
                 cmdCalculate.Text = "Please Wait";
                 cmdCalculate.Enabled = false;
-                cmdBrowse.Enabled = false;
+                cmdBrowse_input.Enabled = false;
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -96,7 +120,7 @@ namespace VXHub
         {
             cmdCalculate.Text = "Calculate";
             cmdCalculate.Enabled = true;
-            cmdBrowse.Enabled = true;
+            cmdBrowse_input.Enabled = true;
         }
 
         private void Label7_Click(object sender, EventArgs e)
@@ -104,6 +128,54 @@ namespace VXHub
 
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
+        }
+
+        private void Label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtSW1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtSW2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtSpeed_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtTime_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
