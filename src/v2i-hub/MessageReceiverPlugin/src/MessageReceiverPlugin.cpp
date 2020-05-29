@@ -194,7 +194,7 @@ void MessageReceiverPlugin::OnMessageReceived(routeable_message &msg)
 				byte_stream bytes; 
 				if (bytesFull.size() > 8)
 				{
-					PLOG(logDEBUG) << "Looking for abbreviated message in bytes " << bytes;
+					PLOG(logDEBUG) << "Looking for abbreviated message in bytes " << bytesFull;
 					uint16_t msgType;
 					uint8_t msgVersion;
 					uint16_t id;
