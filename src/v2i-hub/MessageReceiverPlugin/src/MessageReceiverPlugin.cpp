@@ -192,7 +192,7 @@ void MessageReceiverPlugin::OnMessageReceived(routeable_message &msg)
 				// Check for an abbreviated message
 				byte_stream bytesFull = msg.get_payload_bytes();
 				byte_stream bytes; 
-				if (bytes.size() > 8)
+				if (bytesFull.size() > 8)
 				{
 					PLOG(logDEBUG) << "Looking for abbreviated message in bytes " << bytes;
 					uint16_t msgType;
