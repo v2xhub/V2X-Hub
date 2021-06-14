@@ -165,6 +165,7 @@ jobs:
           docker-compose up -d db
           cd ../../
           docker build --network=host -t usdotfhwaops/v2xhubamd:${CIRCLE_BRANCH,,} .
+          docker commit mysql usdotfhwaops/mysql:${CIRCLE_BRANCH,,}
     
      - run: 
         name: Docker Push
@@ -172,6 +173,8 @@ jobs:
         command: | 
           echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
           docker push usdotfhwaops/v2xhubamd:${CIRCLE_BRANCH,,}
+          docker push usdotfhwaops/mysql:${CIRCLE_BRANCH,,}
+
   docker_build&push_develop :
    machine:
     image: ubuntu-1604:202004-01
@@ -185,6 +188,7 @@ jobs:
           docker-compose up -d db
           cd ../../
           docker build --network=host -t usdotfhwaops/v2xhubamd:latest .
+          docker commit mysql usdotfhwaops/mysql:latest
     
      - run: 
         name: Docker Push
@@ -192,6 +196,7 @@ jobs:
         command: | 
           echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
           docker push usdotfhwaops/v2xhubamd:latest
+          docker push usdotfhwaops/mysql:latest
 workflows:
   version: 2
   build:
