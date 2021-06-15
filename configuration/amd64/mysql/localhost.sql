@@ -79,7 +79,7 @@ CREATE TABLE `installedPlugin` (
 
 LOCK TABLES `installedPlugin` WRITE;
 /*!40000 ALTER TABLE `installedPlugin` DISABLE KEYS */;
-INSERT INTO `installedPlugin` VALUES (1,1,'/var/www/plugins/CommandPlugin','/bin/CommandPlugin','manifest.json','',1,500000),(2,2,'/var/www/plugins/CswPlugin','/bin/CswPlugin','manifest.json','',0,500000),(3,3,'/var/www/plugins/DmsPlugin','/bin/DmsPlugin','manifest.json','',0,500000),(4,4,'/var/www/plugins/DsrcImmediateForwardPlugin','/bin/DsrcImmediateForwardPlugin','manifest.json','',0,500000),(5,5,'/var/www/plugins/LocationPlugin','/bin/LocationPlugin','manifest.json','',0,500000),(6,6,'/var/www/plugins/MapPlugin','/bin/MapPlugin','manifest.json','',0,500000),(7,7,'/var/www/plugins/MessageReceiverPlugin','/bin/MessageReceiverPlugin','manifest.json','',0,500000),(8,8,'/var/www/plugins/ODEPlugin','/bin/ODEPlugin','manifest.json','',0,500000),(9,9,'/var/www/plugins/RtcmPlugin','/bin/RtcmPlugin','manifest.json','',0,500000),(10,10,'/var/www/plugins/SpatPlugin','/bin/SpatPlugin','manifest.json','',0,500000),(11,11,'/var/www/plugins/PreemptionPlugin','/bin/PreemptionPlugin','manifest.json','',0,500000),(12,12,'/var/www/plugins/SPaTLoggerPlugin','/bin/SPaTLoggerPlugin','manifest.json','',0,500000),(13,13,'/var/www/plugins/BsmLoggerPlugin','/bin/BsmLoggerPlugin','manifest.json','',0,500000),(14,14,'/var/www/plugins/PedestrianPlugin','/bin/PedestrianPlugin','manifest.json','',0,500000),(15,15,'/var/www/plugins/TimPlugin','/bin/TimPlugin','manifest.json','',0,500000);
+INSERT INTO `installedPlugin` VALUES (1,1,'/var/www/plugins/CommandPlugin','/bin/CommandPlugin','manifest.json','',1,500000);
 /*!40000 ALTER TABLE `installedPlugin` ENABLE KEYS */;
 UNLOCK TABLES;
 
