@@ -106,6 +106,8 @@ RUN ln -s ../bin MobilityOperationPlugin/bin
 RUN zip MobilityOperationPlugin.zip MobilityOperationPlugin/bin/MobilityOperationPlugin MobilityOperationPlugin/manifest.json
 RUN ln -s ../bin ODELoggerPlugin/bin
 RUN zip ODELoggerPlugin.zip ODELoggerPlugin/bin/ODELoggerPlugin ODELoggerPlugin/manifest.json
+RUN ln -s ../bin CARMAStreetsPlugin/bin
+RUN zip CARMAStreetsPlugin.zip CARMAStreetsPlugin/bin/CARMAStreetsPlugin CARMAStreetsPlugin/manifest.json
 
 
 WORKDIR /home/V2X-Hub/src/tmx/TmxCore/
@@ -149,6 +151,7 @@ RUN tmxctl --plugin-install TimPlugin.zip
 RUN tmxctl --plugin-install CARMACloudPlugin.zip
 RUN tmxctl --plugin-install MobilityOperationPlugin.zip
 RUN tmxctl --plugin-install ODELoggerPlugin.zip
+RUN tmxctl --plugin-install CARMAStreetsPlugin.zip
 
 RUN sudo mkdir /home/V2X-Hub/.base-image 
 

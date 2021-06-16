@@ -162,15 +162,19 @@ jobs:
         # Run MYSQL image and build v2xhub docker image
         command: |
           cd configuration/amd64/
+          docker build -f Dockerfile-mysql-no-volume.yml -t usdotfhwaops/mysql:${CIRCLE_BRANCH,,} --build-arg username=${V2XHUB_USERNAME} --build-arg password=${V2XHUB_PASSWORD}  .
           docker-compose up -d db
           cd ../../
+          docker build -f Dockerfile-php-no-volume.yml -t usdotfhwaops/php:${CIRCLE_BRANCH,,} .
           docker build --network=host -t usdotfhwaops/v2xhubamd:${CIRCLE_BRANCH,,} .
-    
+          docker commit mysql usdotfhwaops/mysql:${CIRCLE_BRANCH,,}
      - run: 
         name: Docker Push
         # Push v2xhub docker image to usdotfhwaops dockerhub
         command: | 
           echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+          docker push usdotfhwaops/mysql:${CIRCLE_BRANCH,,}
+          docker push usdotfhwaops/php:${CIRCLE_BRANCH,,}
           docker push usdotfhwaops/v2xhubamd:${CIRCLE_BRANCH,,}
   docker_build&push_develop :
    machine:
@@ -182,15 +186,19 @@ jobs:
         # Run MYSQL image and build v2xhub docker image develop image
         command: |
           cd configuration/amd64/
+          docker build -f Dockerfile-mysql-no-volume.yml -t usdotfhwaops/mysql:latest --build-arg username=${V2XHUB_USERNAME} --build-arg password=${V2XHUB_PASSWORD} .
           docker-compose up -d db
           cd ../../
+          docker build -f Dockerfile-php-no-volume.yml -t usdotfhwaops/php:latest .
           docker build --network=host -t usdotfhwaops/v2xhubamd:latest .
-    
+          docker commit mysql usdotfhwaops/mysql:latest
      - run: 
         name: Docker Push
         # Push v2xhub docker image to usdotfhwaops dockerhub
         command: | 
-          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+         echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+          docker push usdotfhwaops/mysql:latest
+          docker push usdotfhwaops/php:latest
           docker push usdotfhwaops/v2xhubamd:latest
 workflows:
   version: 2
@@ -206,3 +214,4 @@ workflows:
               ignore: develop
       - build
  
+
