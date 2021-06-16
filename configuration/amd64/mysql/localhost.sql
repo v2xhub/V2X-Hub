@@ -55,10 +55,9 @@ UNLOCK TABLES;
 -- Table structure for table `installedPlugin`
 --
 
-DROP TABLE IF EXISTS `installedPlugin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `installedPlugin` (
+CREATE TABLE IF NOT EXISTS `installedPlugin` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pluginId` int(10) unsigned NOT NULL,
   `path` text NOT NULL,
